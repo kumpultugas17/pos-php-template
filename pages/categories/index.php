@@ -61,8 +61,8 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $category['name']; ?></td>
                                 <td>
-                                  <a href="" class="btn btn-sm btn-warning">Edit</a>
-                                  <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                                  <a href="" class=""><i class="fas fa-edit text-warning"></i></a>
+                                  <a href="" class=""><i class="fas fa-trash text-danger"></i></a>
                                 </td>
                               </tr>
                             <?php endforeach ?>
