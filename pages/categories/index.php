@@ -21,7 +21,7 @@
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
-        <?= isset($pesan) ? $pesan : '';?>
+          <?= isset($pesan) ? $pesan : ''; ?>
           <div class="row">
             <div class="col-lg-6">
               <div class="card card-primary card-outline">
@@ -61,10 +61,47 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $category['name']; ?></td>
                                 <td>
-                                  <a href="" class=""><i class="fas fa-edit text-warning"></i></a>
+                                  <a href="#" type="button" data-toggle="modal" data-target="#modal-edit<?= $category['id']; ?>">
+                                    <i class="fas fa-edit text-warning text-center"></i>
+                                  </a>
                                   <a href="" class=""><i class="fas fa-trash text-danger"></i></a>
                                 </td>
                               </tr>
+                              <!-- modal dialog edit-->
+                              <div class="modal fade" id="modal-edit<?= $category['id']; ?>">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Edit Category</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form action="" method="post">
+                                      <?php
+                                      $id = $category['id'];
+                                      $edit_category = $conn->query("SELECT * FROM categories WHERE id='$id'");
+                                      while ($row = mysqli_fetch_array($edit_category)) :
+                                      ?>
+                                        <input type="hidden" name="id_category" value="<?= $id; ?>">
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <label for="update_category">Name</label>
+                                            <input type="text" name="update_category" class="form-control" id="update_category" value="<?= $row['name']; ?>">
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                                        </div>
+                                      <?php endwhile ?>
+                                    </form>
+                                  </div>
+                                  <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
                             <?php endforeach ?>
                           </tbody>
                         </table>
