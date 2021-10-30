@@ -64,7 +64,7 @@
                                   <a href="#" type="button" data-toggle="modal" data-target="#modal-edit<?= $category['id']; ?>">
                                     <i class="fas fa-edit text-warning text-center"></i>
                                   </a>
-                                  <a href="" class=""><i class="fas fa-trash text-danger"></i></a>
+                                  <a href="index.php?page=category&id=<?= $category['id']; ?>" onclick="return confirm('Data ini akan dihapus?')"><i class="fas fa-trash text-danger"></i></a>
                                 </td>
                               </tr>
                               <!-- modal dialog edit-->
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                          <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                                          <button type="submit" name="btn_update_category" class="btn btn-warning btn-sm">Update</button>
                                         </div>
                                       <?php endwhile ?>
                                     </form>

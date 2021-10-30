@@ -24,3 +24,20 @@ function store_category($data)
 
   return mysqli_affected_rows($conn);
 }
+
+function update_category($data) {
+  global $conn;
+  $id = $_REQUEST['id_category'];
+  $name = htmlspecialchars($data['update_category']);
+  $date = date('Y-m-d');
+
+  $sql = $conn->query("UPDATE categories SET name='$name', updated_at = '$date' WHERE id='$id'");
+
+  return mysqli_affected_rows($conn);
+}
+
+function destroy_category($id) {
+	global $conn;
+	mysqli_query($conn, "DELETE FROM categories WHERE id=$id");
+	return mysqli_affected_rows($conn);
+}
