@@ -45,9 +45,17 @@
             </li>
             <li class="nav-item">
               <a href="index.php?page=categories" class="nav-link <?= $_GET['page'] == 'categories' ? 'active' : ''?> ">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-folder-open"></i>
                 <p>
                   Categories
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="index.php?page=products" class="nav-link <?= $_GET['page'] == 'products' ? 'active' : ''?> ">
+                <i class="nav-icon fas fa-cart-plus"></i>
+                <p>
+                  Products
                 </p>
               </a>
             </li>
