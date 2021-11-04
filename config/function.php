@@ -26,7 +26,8 @@ function store_category($data)
   return mysqli_affected_rows($conn);
 }
 
-function update_category($data) {
+function update_category($data)
+{
   global $conn;
   $id = $_REQUEST['id_category'];
   $name = htmlspecialchars($data['update_category']);
@@ -37,10 +38,11 @@ function update_category($data) {
   return mysqli_affected_rows($conn);
 }
 
-function destroy_category($id) {
-	global $conn;
-	mysqli_query($conn, "DELETE FROM categories WHERE id=$id");
-	return mysqli_affected_rows($conn);
+function destroy_category($id)
+{
+  global $conn;
+  mysqli_query($conn, "DELETE FROM categories WHERE id=$id");
+  return mysqli_affected_rows($conn);
 }
 
 // Product
@@ -58,3 +60,4 @@ function store_product($data)
 
   return mysqli_affected_rows($conn);
 }
+

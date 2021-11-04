@@ -14,7 +14,7 @@
             <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block"><?= $_SESSION['name']; ?></a>
           </div>
         </div>
 
@@ -36,7 +36,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="index.php" class="nav-link <?= !empty($_GET['page']) ? '' : 'active'?>">
+              <a href="index.php" class="nav-link <?= !empty($_GET['page']) ? '' : 'active' ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -44,7 +44,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="index.php?page=categories" class="nav-link <?= $_GET['page'] == 'categories' ? 'active' : ''?> ">
+              <a href="index.php?page=categories" class="nav-link <?= $_GET['page'] == 'categories' ? 'active' : '' ?> ">
                 <i class="nav-icon fas fa-folder-open"></i>
                 <p>
                   Categories
@@ -52,10 +52,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="index.php?page=products" class="nav-link <?= $_GET['page'] == 'products' ? 'active' : ''?> ">
+              <a href="index.php?page=products" class="nav-link <?= $_GET['page'] == 'products' ? 'active' : '' ?> ">
                 <i class="nav-icon fas fa-cart-plus"></i>
                 <p>
                   Products
+                </p>
+              </a>
+            </li>
+            <li class="nav-header">USERS</li>
+            <li class="nav-item">
+              <a href="index.php?page=register" class="nav-link <?= $_GET['page'] == 'register' ? 'active' : '' ?> ">
+                <i class="nav-icon fas fa-user-plus"></i>
+                <p>
+                  Register
                 </p>
               </a>
             </li>
