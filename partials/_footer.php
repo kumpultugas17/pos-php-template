@@ -43,6 +43,8 @@
   <script src="assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="assets/dist/js/demo.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- Page specific script -->
   <script>
     $(function () {
@@ -59,6 +61,17 @@
         "autoWidth": true,
         "buttons": ["excel", "pdf", "print"]
       }).buttons().container().appendTo('#products_wrapper .col-md-6:eq(0)');
+
+      $("#table_register").DataTable({
+        "responsive": false,
+        "lengthChange": false,
+        "autoWidth": true,
+        "buttons": ["excel", "pdf", "print"]
+      }).buttons().container().appendTo('#register_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function () {
+      bsCustomFileInput.init();
     });
   </script>
 </body>
