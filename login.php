@@ -85,7 +85,7 @@ if (isset($_POST['btn_login'])) {
   $email = $_REQUEST['email'];
   $password = $_REQUEST['password'];
 
-  $sql = $conn->query("SELECT email, password, name, role_code FROM users WHERE email='$email'");
+  $sql = $conn->query("SELECT email, password, name, role_code, avatar FROM users WHERE email='$email'");
   $result = mysqli_fetch_assoc($sql);
 
   $check = isset($_POST['remember']) ? $_POST['remember'] : '';
@@ -95,6 +95,7 @@ if (isset($_POST['btn_login'])) {
       session_start();
       $_SESSION['name'] = $result['name'];
       $_SESSION['role_code'] = $result['role_code'];
+      $_SESSION['avatar'] = $result['avatar'];
       if ($check) {
            setcookie("remember", password_hash($result['role_code'], PASSWORD_DEFAULT), time() + 3600);
       }

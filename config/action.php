@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
     header('location:index.php?page=categories');
   } else {
     $pesan = "<div class='alert alert-danger'>Gagal menghapus data!</div>";
-    header('location:index.php?page=categories&');
+    header('location:index.php?page=categories');
   }
 }
 
@@ -33,5 +33,20 @@ if (isset($_POST['btn_product'])) {
     $pesan = "<div class='alert alert-success'>Berhasil menambahkan data!</div>";
   } else {
     $pesan = "<div class='alert alert-danger'>Gagal menambahkan data!</div>";
+  }
+}
+
+// Register
+if (isset($_POST['btn_register'])) {
+  $password = $_REQUEST['password'];
+  $confirm = $_REQUEST['confirm'];
+  if ($password != $confirm) {
+    header('location:index.php?page=register&confirm');
+  } else {
+    if (store_users($_POST) > 0) {
+      $pesan = "<div class='alert alert-success'>Berhasil menambahkan akun baru!</div>";
+    } else {
+      $pesan = "<div class='alert alert-danger'>Gagal menambahkan akun!</div>";
+    }
   }
 }

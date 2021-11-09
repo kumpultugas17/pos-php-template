@@ -61,3 +61,63 @@ function store_product($data)
   return mysqli_affected_rows($conn);
 }
 
+// Register
+function store_users($data) {
+  global $conn;
+  $email = htmlspecialchars($data['email']);
+  $name = htmlspecialchars($data['name']);
+  $role_code = htmlspecialchars($data['role']);
+  $password = password_hash(htmlspecialchars($data['password']), PASSWORD_DEFAULT);
+  $date = date('Y-m-d H:i:s');
+
+  // upload avatar
+  $avatar = upload_avatar();
+
+  $sql = $conn->query("INSERT INTO users (email, name, password, avatar, role_code, created_at) VALUES ('$email', '$name', '$password', '$avatar', '$role_code', '$date')");
+
+  return mysqli_affected_rows($conn);
+}
+
+function upload_avatar() {
+  $namaFile = $_FILES['avatar']['name'];
+  $ukuranFile = $_FILES['avatar']['size'];
+  $error = $_FILES['avatar']['error'];
+  $tmpName = $_FILES['avatar']['tmp_name'];
+
+  // cek apakah tidak ada gambar yang diupload
+  if ($error === 4) {
+    echo "<script>
+        alert('Pilih Avatar terlebih dahulu');
+    </script>";
+    return false;
+  }
+
+  // cek apakah yang diupload gambar
+  $ekstensiAvatarValid = ['jpg', 'jpeg', 'png'];
+  $ekstensiAvatar = explode('.', $namaFile);
+  $ekstensiAvatar = strtolower(end($ekstensiAvatar));
+  if (!in_array($ekstensiAvatar, $ekstensiAvatarValid)) {
+    echo "<script>
+        alert('Yang dipilih bukan format gambar!');
+    </script>";
+    return false;
+  }
+
+  // cek jika ukuran terlalu besar
+  if ($ukuranFile > 1000000) {
+    echo "<script>
+        alert('Ukuran gambar terlalu besar!');
+    </script>";
+    return false;
+  }
+
+  // lolos pengecekan, avatar siap upload
+  // generate nama gambar baru
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= '.';
+  $namaFileBaru .= $ekstensiAvatar;
+
+  move_uploaded_file($tmpName, 'assets/avatar/'. $namaFileBaru);
+
+  return $namaFileBaru;
+}

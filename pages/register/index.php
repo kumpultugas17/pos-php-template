@@ -46,11 +46,11 @@
                     </div>
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
+                      <input type="password" name="password" class="form-control <?php echo isset($_GET['confirm']) ? 'is-invalid' : '' ?>" id="password" placeholder="Enter Password">
                     </div>
                     <div class="form-group">
                       <label for="confirm">Confirm Password</label>
-                      <input type="password" name="confirm" class="form-control" id="confirm" placeholder="Enter Confirm Password">
+                      <input type="password" name="confirm" class="form-control <?= isset($_GET['confirm']) ? 'is-invalid' : '' ?>" id="confirm" placeholder="Enter Confirm Password">
                     </div>
                     <div class="form-group">
                       <label for="avatar">File input</label>
