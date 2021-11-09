@@ -121,3 +121,24 @@ function upload_avatar() {
 
   return $namaFileBaru;
 }
+
+function update_user($data) {
+  global $conn; 
+  $id = $data['id'];
+  $email = htmlspecialchars($data['email']);
+  $name = htmlspecialchars($data['name']);
+  $role_code = htmlspecialchars($data['role']);
+  $avatar_old = $data['avatar_old'];
+  $date = date('Y-m-d H:i:s');
+
+  // cek apakah user memilih gambar baru atau tidak
+  if ($_FILES['avatar']['error'] === 4) {
+    $avatar = $avatar_old;
+  } else {
+    $avatar = upload_avatar();
+  }
+
+  $sql = $conn->query("UPDATE users SET email = '$email', name = '$name', role_code = '$role_code', avatar = '$avatar', updated_at = '$date' WHERE id = '$id'");
+
+  return mysqli_affected_rows($conn);
+}

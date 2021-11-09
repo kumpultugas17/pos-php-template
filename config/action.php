@@ -50,3 +50,11 @@ if (isset($_POST['btn_register'])) {
     }
   }
 }
+
+if (isset($_POST['btn_update_user'])) {
+  if (update_user($_POST) > 0) {
+    $pesan = "<div class='alert alert-success'>Berhasil merubah akun!</div>";
+  } else {
+    $pesan = "<div class='alert alert-danger'>Gagal merubah akun!</div>";
+  }
+}

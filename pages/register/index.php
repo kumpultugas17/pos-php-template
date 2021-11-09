@@ -97,14 +97,14 @@
                                 <td><?= $user['email']; ?></td>
                                 <td><?= $user['name']; ?></td>
                                 <td>
-                                  <?php 
-                                if ($user['role_code'] == 0) {
-                                  echo "Super Admin";
-                                } elseif ($user['role_code'] == 1) {
-                                  echo "Admin";
-                                } else {
-                                  echo "User";
-                                }; 
+                                  <?php
+                                  if ($user['role_code'] == 0) {
+                                    echo "Super Admin";
+                                  } elseif ($user['role_code'] == 1) {
+                                    echo "Admin";
+                                  } else {
+                                    echo "User";
+                                  };
                                   ?>
                                 </td>
                                 <td>
@@ -115,31 +115,62 @@
                                 </td>
                               </tr>
                               <!-- modal dialog edit-->
-                              <div class="modal fade" id="modal-edit<?= $category['id']; ?>">
+                              <div class="modal fade" id="modal-edit<?= $user['id']; ?>">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h4 class="modal-title">Edit Category</h4>
+                                      <h4 class="modal-title">Edit User</h4>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <form action="" method="post">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                       <?php
-                                      $id = $category['id'];
-                                      $edit_category = $conn->query("SELECT * FROM categories WHERE id='$id'");
-                                      while ($row = mysqli_fetch_array($edit_category)) :
+                                      $id = $user['id'];
+                                      $edit_user = $conn->query("SELECT * FROM users WHERE id='$id'");
+                                      while ($row = mysqli_fetch_array($edit_user)) :
                                       ?>
-                                        <input type="hidden" name="id_category" value="<?= $id; ?>">
                                         <div class="modal-body">
+                                          <input type="hidden" name="id" value="$id">
                                           <div class="form-group">
-                                            <label for="update_category">Name</label>
-                                            <input type="text" name="update_category" class="form-control" id="update_category" value="<?= $row['name']; ?>">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" class="form-control" id="email" value="<?= $row['email'] ?>">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" name="name" class="form-control" id="name" value="<?= $row['name'] ?>">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="role">Role</label>
+                                            <select name="role" class="form-control" id="role">
+                                              <option value="0" <?= $row['role_code'] == 0 ? 'selected' : '' ?>>Super Admin</option>
+                                              <option value="1" <?= $row['role_code'] == 1 ? 'selected' : '' ?>>Admin</option>
+                                              <option value="2" <?= $row['role_code'] == 2 ? 'selected' : '' ?>>User</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group">
+                                            <Label>Avatar Old</Label>
+                                            <div class="text-left">
+                                              <input type="hidden" name="avatar_old" value="<?= $row['avatar'] ?>">
+                                              <img class="profile-user-img img-fluid " src="assets/avatar/<?= $row['avatar'] != '' ? $row['avatar'] : 'default.png' ?>" alt="User profile picture">
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="avatar">File input</label>
+                                            <div class="input-group">
+                                              <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="avatar" id="avatar">
+                                                <label class="custom-file-label" for="avatar">Choose File</label>
+                                              </div>
+                                              <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                              </div>
+                                            </div>
                                           </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                          <button type="submit" name="btn_update_category" class="btn btn-warning btn-sm">Update</button>
+                                          <button type="submit" name="btn_update_user" class="btn btn-warning btn-sm">Update</button>
                                         </div>
                                       <?php endwhile ?>
                                     </form>
